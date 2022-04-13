@@ -10,8 +10,5 @@ export const post = function (url, params) {
         headers: { 'Content-Type': 'application/json', 'request-ajax': true }
 
     }
-    axios.request(query)
-        .then(res => {
-            console.log(res)
-        })
+    return axios.request(query)
 }

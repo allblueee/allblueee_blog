@@ -1,26 +1,25 @@
 <template>
   <div id="overrall">
-    <nav style="position:fixed">
+    <nav>
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
+      <router-link to="/about">About</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/write">Write</router-link>
     </nav>
-    <router-view  />
+      <router-view />
   </div>
 </template>
 
 <style scoped>
 #overrall {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  height: 100%;
 }
 nav {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 30px;
+  position: absolute;
+  right: 0;
+  width: 320px;
+  padding: 15px;
+  height: 30px;
 }
 nav a {
   margin: 0 5px 0 5px;

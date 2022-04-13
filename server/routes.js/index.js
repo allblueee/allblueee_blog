@@ -44,7 +44,19 @@ router.post('/api/user/signin', function(req, res){
         if(docs.password == userInfo.password){
             res.send({code:0,message:"登录成功"})
         }
+        else {
+            res.send({code:1,message:"密码错误"})
+        }
     })
 })
 
+router.post('/api/user/newarticle', function(req, res){
+    new db.Article(req.body.articleInformation).save(function(err){
+        if(err){
+            res.status(500).send()
+            return
+        }
+        res.send({code:0,message:'创建文章成功'})
+    })
+})
 module.exports = router 
