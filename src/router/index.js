@@ -22,8 +22,13 @@ const routes = [
   },
   {
     path: '/write',
-    name: '/write',
+    name: 'write',
     component: ()=> import('../views/WriteView.vue')
+  },
+  {
+    path: '/articledetail/:id',
+    name: 'articledetail',
+    component: ()=> import('../views/ArticleDetailView.vue')
   }
 ]
 

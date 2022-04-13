@@ -1,8 +1,10 @@
 <template>
   <div class="home">
+    <h1>Hi,I am allblueee. Welcome to myplace</h1>
+    <h1>Coding, Travel, curious</h1>
     <div class="article_wrap" v-for="item in articleList" :key="item._id">
-      <div class="article_title" @click="getArticleById">{{ item.title }}</div>
-      <div class="article_date">{{ item.date }}</div>
+      <div class="article_title" @click="getArticleById(item._id)"><h3>{{ item.title }}</h3></div>
+      <div class="article_date"><h3>{{ item.date }}</h3></div>
     </div>
   </div>
 </template>
@@ -25,6 +27,9 @@ export default {
       this.articleList = res.data;
       console.log(this.articleList);
     },
+    getArticleById(id){
+      this.$router.push('/articleDetail/'+id)
+    }
   },
 };
 </script>
@@ -33,15 +38,18 @@ export default {
   position: relative;
   top: 60px;
   width: 100%;
+  text-align: center;
+}
+.article_wrap {
+  margin-left: 20%;
+  margin-right: 20%;
+  display: flex;
+  justify-content: space-between;
 }
 .article_title {
-  display: inline;
   width:40%;
 }
 .article_date {
-  display: inline;
-  position: absolute;
-  right:0;
   width:120px;
 }
 .blogs {
