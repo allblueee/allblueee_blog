@@ -1,34 +1,50 @@
 <template>
   <div class="home">
-    <router-view class="blogs">
-      <HelloWorld msg="Welcome to Myplace" />
-    </router-view>
+    <div class="article_wrap" v-for="item in articleList" :key="item._id">
+      <div class="article_title" @click="getArticleById">{{ item.title }}</div>
+      <div class="article_date">{{ item.date }}</div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import { get } from "@/utils/request";
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      articleList: [],
+    };
+  },
+  created() {
+    this.getArticleList();
+  },
+  methods: {
+    async getArticleList() {
+      let res = await get("/api/user/articlelist");
+      this.articleList = res.data;
+      console.log(this.articleList);
+    },
   },
 };
 </script>
 <style scoped>
 .home {
-  display: flex;
-  flex-wrap: nowrap;
-  width:100%;
+  position: relative;
+  top: 60px;
+  width: 100%;
 }
-.catalogue{
-  width:20%;
-  font-size: 22px;
+.article_title {
+  display: inline;
+  width:40%;
 }
-
-.blogs{
-  width:80%;
+.article_date {
+  display: inline;
+  position: absolute;
+  right:0;
+  width:120px;
+}
+.blogs {
+  width: 80%;
 }
 </style>

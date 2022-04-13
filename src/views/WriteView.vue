@@ -22,6 +22,7 @@ export default {
     return {
       title: "",
       content: "",
+      data: "",
     };
   },
   methods: {
@@ -33,19 +34,28 @@ export default {
     update: _.debounce(function (e) {
       this.content = e.target.value;
     }, 300),
+    getDate() {
+      let mydate, y, m, d;
+      mydate = new Date();
+      y = mydate.getFullYear();
+      m = mydate.getMonth();
+      d = mydate.getDate();
+      if (m < 10) m = "0" + m;
+      if (d < 10) d = "0" + d;
+      this.date = y + "-" + m + "-" + d ;
+    },
     async saveArticle() {
+      this.getDate();
       let _this = this;
       let res = await post("/api/user/newarticle", {
-        articleInformation: { title: this.title, content: this.content },
+        articleInformation: { title: this.title, content: this.content, date:this.date },
       });
-      if(res.data.code == 1){
-        _this.$message.error(res.data.message)
+      if (res.data.code == 1) {
+        _this.$message.error(res.data.message);
+      } else {
+        _this.$message.success(res.data.message);
       }
-      else {
-        _this.$message.success(res.data.message)
-        
-      }
-      this.$router.push('/')
+      this.$router.push("/");
     },
   },
 };

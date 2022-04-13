@@ -53,10 +53,20 @@ router.post('/api/user/signin', function(req, res){
 router.post('/api/user/newarticle', function(req, res){
     new db.Article(req.body.articleInformation).save(function(err){
         if(err){
-            res.status(500).send()
+            res.status(500).send({code:1,message:'服务器内部错误'})
             return
         }
         res.send({code:0,message:'创建文章成功'})
+    })
+})
+
+router.get('/api/user/articlelist', function(req, res){
+    db.Article.find({}, function(err, docs){
+        if(err){
+            res.status(500).send({code:1,message:'服务器内部错误'})
+            return
+        }
+        res.json(docs)
     })
 })
 module.exports = router 

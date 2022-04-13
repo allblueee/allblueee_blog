@@ -12,3 +12,14 @@ export const post = function (url, params) {
     }
     return axios.request(query)
 }
+
+export const get = function (url) {
+    const query = {
+        url: url,
+        method: 'get',
+        timeout: 100000,
+        headers: { 'Content-Type': 'application/json', 'request-ajax': true }
+
+    }
+    return axios.request(query)
+}
